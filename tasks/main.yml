@@ -1,14 +1,16 @@
 ---
-- name: ensure libselinux-python is installed
+- name: ensure libselinux-python and policycoreutils-python are installed (CentOS 7)
   package:
-    name: libselinux-python
+    name: libselinux-python,policycoreutils-python
     state: present
+  when: ansible_distribution == 'CentOS' and ansible_distribution_version == '7'
   tags: selinux
 
-- name: ensure policycoreutils-python is installed
+- name: ensure policycoreutils-python-utils is installed (CentOS 8)
   package:
-    name: policycoreutils-python
+    name: policycoreutils-python-utils
     state: present
+  when: ansible_distribution == 'CentOS' and ansible_distribution_version == '8'
   tags: selinux
 
 - name: configure selinux policy and state
